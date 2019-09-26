@@ -17,8 +17,7 @@
 + Node
 
     运行在服务端的 JavaScript。
-    Node.js 是一个基于Chrome JavaScript 运行时建立的一个平台。
-Node.js是一个事件驱动I/O服务端JavaScript环境，基于Google的V8引擎，V8引擎执行Javascript的速度非常快，性能非常好。
+    Node.js 是一个基于Chrome JavaScript 运行时建立的一个平台；是一个事件驱动I/O服务端JavaScript环境，基于Google的V8引擎，V8引擎执行Javascript的速度非常快，性能非常好。
 ## 3、ES的几个重要版本
 ##### (1)ES5 : 2009 年 12 月，ECMAScript 5.0 版正式发布。
 ##### (2)ES6(ES2015) : 2015年6月， ES6 正式通过，成为国际标准。
