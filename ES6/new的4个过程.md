@@ -16,7 +16,7 @@ obj.__proto__ = foo.prototype;
 - 判断foo的返回值类型，如果是值类型，返回obj；
 如果是引用类型，就返回这个引用类型的对象。
     ~~~
-    if (typeof(result) == "object")
-	    person = result;
+    if (typeof(result) == "object") 
+	    person = result;  
     else
 	    person = obj;
