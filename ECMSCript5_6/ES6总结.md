@@ -92,130 +92,14 @@ f(1,2,3)
 let arr1 = [1,2]
 let arr2 = [...arr1] // 或者let [...arr2] = arr1
 ~~~
-## 6. 面向对象 class
-通过class关键字，可以定义类
-~~~javascript
-class User {
-    constructor(name) {          // 构造器，相当于es5中的构造函数
-        this.name = name         // 实例属性
-    }
-    showName(){                  // 定义类的方法，不能使用function关键字，不能使用逗号分隔
-        console.log(this.name)   
-    }
-}
-var foo = new User('foo')
-~~~
-1. constructor
-    
-    - es6中class类专用的构造器，相当于之前定义的构造函数，每个类都必须有constructor，如果没有则自动添加一个空的constructor构造器。
-    - 创建实例的时候自动执行constructor函数
-constructor中的this指向实例，并且默认返回this（实例）
-2. class类的prototype
-    - class的基本类型就是函数（typeof User = "function"），既然是函数，那么就会有prototype属性。
-    - 类的所有方法都是定义在prototype上
-~~~javascript
-class User {
-  constructor() {
-    // ...
-  }
-
-  toString() {
-    // ...
-  }
-
-  toValue() {
-    // ...
-  }
-}
-User.toValue()             // err User.toValue is not a function
-User.prototype.toValue()   // 可以调用toValue方法
-
-// 等同于
-
-User.prototype = {
-  constructor() {},
-  toString() {},
-  toValue() {},
-};
-~~~
-3. 类的实例
-    - 类的实例只能通过new来创建
-    - 除了静态方法，定义在类上的所有的方法都会被实例继承
-    - 除非定义在类的this对象上才是实例属性，否则都是定义在类的原型（prototype）上
-~~~javascript
-class Point {
-
-  constructor(x, y) {
-    this.x = x;
-    this.y = y;
-  }
-
-  toString() {
-    return '(' + this.x + ', ' + this.y + ')';
-  }
-
-}
-
-var point = new Point(2, 3);
-
-point.toString() // (2, 3)
-
-point.hasOwnProperty('x') // true
-point.hasOwnProperty('y') // true
-point.hasOwnProperty('toString') // false
-point.__proto__.hasOwnProperty('toString') // true
-~~~
-4. 静态方法
-    - 如果在类中定义一个方法的前面加上static关键字，就表示定义一个静态方法
-    - 静态方法不会被实例继承，但会被子类继承
-    - 不能通过实例使用静态方法，而是通过类直接调用
-~~~javascript
-class User {
-    constructor(name){
-        this.name = name
-    }
-    static show(){
-        console.log('123')
-    }
-}
-class VipUser extends User{}
-VipUser.show()                    // 123
-User.show()                       // 123
-var foo = new User('foo')
-foo.show()                        // foo.show is not a function
-~~~
-5. 静态属性
-    - class的静态属性指的是 Class 本身的属性，
-    - 目前只能通过Class.propName定义静态属性
-    - 静态属性可以被子类继承，不会被实例继承
-~~~javascript
-class User{}
-User.name = 'foo' // 为class定义一个静态属性
-
-class VipUser extends User{}
-console.log(VipUser.name)         // foo
-
-var foo = new User()
-console.log(foo.name)             // undefined
-~~~
-## 7. 类的继承
-
-**class通过extends关键字实现继承**
-1. super
-    - super可以当做函数使用，也可以当做对象使用。
-    - ES6规定，在子类中使用super对象调用父类方法时，方法内部的this指向子类
-
-2. 类的prototype和__proto__属性
-    - es5中每一个对象都有__proto__属性，指向对应构造函数的prototype属性。
-    - Class 作为构造函数的语法糖，同时有prototype属性和__proto__属性，因此同时存在两条继承链。
-    - 子类的__proto__属性，表示构造函数的继承，总是指向父类。
-    - 子类prototype属性的__proto__属性，表示方法的继承，总是指向父类的prototype属性。
-
-3. 实例的__proto__属性
-    - 子类实例的__proto__属性指向子类的原型（子类的prototype）
-    - 子类实例的__proto__属性的__proto__属性指向父类的原型（父类的prototype）
-
-## 8. 对象
+## 6. class类使用详解
+1. 通过class定义类/实现类的继承
+2. 在类中通过constructor定义构造方法
+3. 通过new来创建类的实例
+4. 通过extends来实现类的继承
+5. 通过super调用父类的构造方法
+6. 重写从父类中继承的一般方法
+## 7. 对象
 1. 对象的扩展运算符 ...（可以把对象可枚举的属性拆分为键值对序列）
 ~~~javascript
 //用于对象拷贝
@@ -257,7 +141,7 @@ Object.entries() 返回一个数组，成员是参数对象所有可枚举属性
 const obj = { foo: 'bar', baz: 42 };
 Object.entries(obj)  // [ ["foo", "bar"], ["baz", 42] ]
 ~~~
-## 9. Generator函数
+## 8. Generator函数
 - 可理解为**生成器**，和普通函数没多大区别，普通函数是只要开始执行，就一直执行到底，而Generator函数是中间可以停，搭配使用next函数继续执行，像挤牙膏
 
 - 最直观的表现就是比普通的function多了个星号*，在其函数体内可以使用yield关键字，有函数会在每个yield后暂停。
@@ -269,72 +153,24 @@ Object.entries(obj)  // [ ["foo", "bar"], ["baz", 42] ]
 - next方法不仅返回值，它返回的对象具有两个属性：done和value。
 value是你获得的值，done用来表明你的generator是否已经停止提供值。
 
-那生成器和迭代器又有什么用处呢？
+  ### 生成器和迭代器的用处？
+- 生成器可以让我们的代码进行等待。就不用嵌套的回调函数。
+- 使用generator可以确保当异步调用在我们的generator函数运行一下行代码之前完成时暂停函数的执行。
+- 可创建外观清晰的异步操作代码
+- 不必到处使用回调函数，而是可以建立貌似同步的代码，但实际上却使用 yield 来等待异步操作结束。
 
-围绕着生成器的许多兴奋点都与异步编程直接相关。异步调用对于我们来说是很困难的事，我们的函数并不会等待异步调用完再执行，你可能会想到用回调函数，（当然还有其他方案比如Promise比如Async/await）。
-
-生成器可以让我们的代码进行等待。就不用嵌套的回调函数。使用generator可以确保当异步调用在我们的generator函数运行一下行代码之前完成时暂停函数的执行。
-
-生成器与迭代器最有趣、最令人激动的方面，或许就是可创建外观清晰的异步操作代码。你不必到处使用回调函数，而是可以建立貌似同步的代码，但实际上却使用 yield 来等待异步操作结束。
-
-9. async await
-async其实就是对Generator的封装，只不过async可以自动执行next()。
-
-async function read () {
-    let data1= await new Promise(resolve => {
-        resolve('100')
-    })
-    let data2 = await 200
-    
-    return 300
-}
-(1)async 返回值
-async默认返回一个Promise，如果return不是一个Promise对象，就会被转为立即resolve的Promise，可以在then函数中获取返回值。
-
-async必须等到里面所有的await执行完，async才开始return，返回的Promise状态才改变。除非遇到return和错误。
-
-async function fn () {
-    await 100
-    await 200
-    return 300
-}
-fn().then(res => {
-    console.log9(res) // 300
-})
-(3)await
-await也是默认返回Promise对象，如果await后面不是一个Promise对象，就会转为立即resolve的Promise
-
-如果一个await后面的Promise如果为reject，那么整个async都会中断执行，后面的awiat都不会执行，并且抛出错误，可以在async的catch中捕获错误
-
-async function f() {
-  await Promise.reject('error');
-  await Promise.resolve('hello world'); // 不会执行
-}
-f().then(res =>{
-
-}).catch(err=>{
-    console.log(err)  // error
-})
-如果希望一个await失败，后面的继续执行，可以使用try...catch或者在await后面的Promise跟一个catch方法：
-
-// try...catch
-async function f() {
-  try {
-    await Promise.reject('出错了');
-  } catch(e) {
-  }
-  return await Promise.resolve('hello world');
-}
-
-f()
-.then(v => console.log(v))   // hello world
-
-// catch
-async function f() {
-  await Promise.reject('出错了')
-    .catch(e => console.log(e));   // 出错了
-  return await Promise.resolve('hello world');
-}
-
-f()
-.then(v => console.log(v))  // hello world
+## 9. async await
+1. 概念： 真正意义上去解决异步回调的问题，同步流程表达异步操作
+2. 本质： Generator的语法糖
+3. 语法：
+~~~JavaScript
+    async function foo(){
+      await 异步操作;
+      await 异步操作；
+    }
+~~~
+4. 特点：
+- 不需要像Generator去调用next方法，遇到await等待，当前的异步操作完成就往下执行
+- 返回的总是Promise对象，可以用then方法进行下一步操作
+- async取代Generator函数的星号*，await取代Generator的yield
+- 语意上更为明确，使用简单，经临床验证，暂时没有任何副作用
