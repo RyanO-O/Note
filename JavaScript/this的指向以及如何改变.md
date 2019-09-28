@@ -15,7 +15,7 @@
 2. **在函数内部使用 _this = this**
 
     先将调用这个函数的对象保存在变量 _this 中，然后在函数中都使用这个 _this
-    ~~~
+    ~~~javascript
     var name = "windows";
     var a = {
         name : "Ryan",
@@ -38,7 +38,7 @@
     - call 接受的是若干个参数列表
     - bind 创建一个新的函数，必须要手动调用
 4. **用new调用函数，改变指向new的实例对象**
-    ~~~
+    ~~~javascript
     function foo1(){
         this.name = "Ryan";
     }

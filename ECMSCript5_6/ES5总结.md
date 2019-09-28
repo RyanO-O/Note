@@ -25,7 +25,7 @@
     - JSON是数据传输的格式。服务器发送给我们的很可能是一长串普通的字符串，里面包含了多个数据，无法对数据进行分类，并不能直接使用。
 
     - 因此我们需要的是JSON的对象（数组）可以与原生的对象和数组进行转化，即，一一对应的关系。（对象(数组)都是用来保存数据的。）
-    ~~~ 
+    ~~~ javascript
     <script type="text/javascript">
     var obj = {
         name : 'Ryan'
@@ -49,7 +49,7 @@
     - configurable : 标识当前属性值是否是可删除, 默认为false
 
     - enumerable : 标识当前属性值是否可用for in枚举, 默认为false
-    ~~~
+    ~~~javascript
     <script type="text/javascript">
 	var obj = {username: 'Ryan' }//属性可继承
 	var obj1 = {};
@@ -75,7 +75,7 @@
     - get：用来获取当前属性值的回调函数，获取扩展属性值时get方法自动调用
     - set：监听当前属性值的触发的回调函数，扩展属性变化时会自动调用，后会将变化的值作为实参注入到set函数
     - 存取器属性：setter，getter一个用来存值一个用来取值
-    ~~~
+    ~~~javascript
     <script type="text/javascript">
 	var obj2 = {firstName: 'Taylor' , lastName: 'Swift'};
 	Object.defineProperties(obj2 , {
@@ -103,7 +103,8 @@
  3. 对象本身的两个方法
     - get propertyName(){} 用来得到当前属性值的回调函数
     - set propertyName(){} 用来监视当前属性值变化的回调函数
-    ~~~<script type='text/javascript'>
+    ~~~javascript
+    <script type='text/javascript'>
     var obj = {
         firstName : 'Taylor',
         lastName : 'Swift',
@@ -130,7 +131,7 @@
 1. 在不传参的情况下，call、apply的使用方法一样
 2. 传入参数的情况下，call直接接后边传，apply放到数组里传
 3. call、apply绑定this的特点：立即调用函数
-    ~~~
+    ~~~javascript
     <script type="text/javascript">
 	var obj = {username: 'Ryan'};
 	function foo() {
@@ -150,7 +151,7 @@
     - bind 传参的方法同call一样
     - 绑定完this不会立即调用当前的函数，而是将函数返回
     - bind通常指定回调函数的this（回调函数：函数作为参数传入到另一个函数）
-~~~
+~~~javascript
 	foo.bind(obj);//无输出，本质原因是foo函数未调用
 	foo.bind(obj)();//不需要用var定义，直接调用;结果为：{username: "Ryan"} undefined
 	foo.bind(obj , 7)();//结果为：{username: "Ryan"} 7
