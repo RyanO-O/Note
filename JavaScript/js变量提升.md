@@ -52,4 +52,4 @@ test();//报错：TypeError：foo is not a function
 **记住：在每个作用域开始前声明这些变量！！！**
 （“噗~~~什么是作用域”  小声嘀咕。。。)
 
-All right . . .下一篇讲一下“js的作用域和作用域链”
+All right . . .下一篇讲一下[js的作用域和作用域链](https://blog.csdn.net/weixin_45497246/article/details/101686676)
