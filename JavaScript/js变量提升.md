@@ -14,15 +14,19 @@ elem.innerHTML = x + " " + y;           // 显示 x 和 y，结果是5 7
 var x = 5; // 初始化 x
 elem.innerHTML = x + " " + y;           // 显示 x 和 y，结果是5 undefined
 var y = 7; // 初始化 y
-//为森么y是undefined捏？
+//为森么y是undefined而不是报错：y is not defined
 
 //实例2相当于下面实例3
 var x = 5; // 初始化 x
 var y;     // 声明 y
 elem.innerHTML = x + " " + y;           // 显示 x 和 y
 y = 7;    // 设置 y 为 7，但是没有用（嘻嘻嘻。。）
-//因为变量声明 (var y) 提升了，但是初始化(y = 7) 不会提升，所以 y 变量未定义吖
+//因为变量声明 (var y) 提升了，但是初始化(y = 7) 不会提升，
+//也就是y不会被赋值，所以 y 变量默认undefined吖
 ~~~
+- 浏览器会先解析脚本，完成一个初始化的步骤
+- 遇到 var 变量时会先初始化变量为 undefined
+- 变量提升——浏览器遇到 JS 执行环境的初始化，引起变量提前定义
 ## 3. 听说还有函数提升
 两种写法：一种是函数表达式，另外一种是函数声明方式
 
