@@ -1,4 +1,13 @@
-# ES5
+### 文章导航：
+[1.ES5是ECMAScript标准最新修正](#1es5是ecmascript标准最新修正)
+
+[2.JSON对象](#2json对象)
+
+[3.object对象方法扩展](#3object对象方法扩展)
+
+[4.数组扩展](#4数组扩展)
+
+[5.Function(函数)扩展](#5function函数扩展)
 ## 1.ES5是ECMAScript标准最新修正
 + ES5通过对现有JS方法添加语句和原生ECMAScript对象做合并实现标准化。
 + ES5还引入了一个语法的严格变种，被称为”严格模式(strict mode)”。

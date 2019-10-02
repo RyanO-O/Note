@@ -1,3 +1,23 @@
+### 文章导航：
+[ES6是什么](#es6是什么)
+
+[1. let、const](#1-letconst)
+
+[2. 箭头函数（函数的简写）](#2-箭头函数函数的简写)
+
+[3. 解构赋值](#3-解构赋值)
+
+[4. 模板字符串](#4-模板字符串)
+
+[5. Spread Operator 展开运算符](#5-spread-operator-展开运算符)
+
+[6. class类使用详解](#6-class类使用详解)
+
+[7. 对象](#7-对象)
+
+[8. Generator函数](#8-generator函数)
+
+[9. async await](#9-async-await)
 ## ES6是什么
 - ECMA和js的关系：ECMA是标准，Javascript是ECMA的实现。
 - js是一种语言，但凡语言都有一套标准，而ECMA就是javascript的标准。
