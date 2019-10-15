@@ -28,7 +28,7 @@
     <!-- 2.创建控制区域 -->
     <div id="app">
         <input type="button" value="run!" v-on:click="run">
-        <input type="button" value="stop!">
+        <input type="button" value="stop!" v-on:click="stop">
         <h4>{{msg}}</h4>
     </div>
     <!-- 3.定义vue实例 -->
@@ -37,12 +37,13 @@
     var vm = new Vue({
         el:'#app',
         data:{
-            msg:'走过路过千万不要错过，清仓大减价 ! ! !'
+            msg:'走过路过千万不要错过，清仓大减价 ! ! !',
+            intervalId:null
         },
         methods: {
             run(){
                 // var _this = this
-                setInterval(() =>{
+                this.intervalId = setInterval(() =>{
                     // 获取开头第一个字符
                     var head = this.msg.substring(0,1)
                     // 获取第一个之后的所有字符
@@ -51,6 +52,9 @@
                     this.msg = tail + head
                     // 注意：vm实例会监听data中的数据变化并同步到html
                 },400)
+            },
+            stop(){
+                clearInterval()
             }
         }
     })
